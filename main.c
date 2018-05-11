@@ -3,65 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsarapin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vomelchu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 15:41:06 by vsarapin          #+#    #+#             */
-/*   Updated: 2017/12/05 16:55:32 by vsarapin         ###   ########.fr       */
+/*   Created: 2018/05/06 16:07:08 by vomelchu          #+#    #+#             */
+/*   Updated: 2018/05/06 18:03:30 by vomelchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	free_square(char **square)
+void	free_array(char **str)
 {
-	int i;
+	int q;
 
-	i = 0;
-	while (square[i])
+	q = 0;
+	while (str[q])
 	{
-		free(square[i]);
-		i++;
+		free(str[q]);
+		q++;
 	}
-	free(square);
-	square = NULL;
-}
-
-void	free_lst(t_tetra *div_prog)
-{
-	t_tetra *tmp;
-
-	while (div_prog != NULL)
-	{
-		tmp = div_prog->next;
-		free(div_prog);
-		div_prog = tmp;
-	}
+	free(str[q]);
+	free(str);
 }
 
 int		main(int argc, char **argv)
 {
-	char	*array;
-	int		fd;
-	int		i;
-	t_tetra	*div_prog;
+	char	**split;
+	char	**line;
+	t_figur *head;
+	char	symbol;
 
-	i = 0;
-	if (argc != 2)
+	symbol = 'A';
+	if (argc == 2)
 	{
-		ft_putstr("usage fillit <file>\n");
-		return (1);
+		split = fileopen(argv[1]);
+		if (checksizemap(split) && checksize(split) && checksymbol(split)
+			&& checkcountsymb(split) && rightfigure(split))
+		{
+			line = cutfigure(split);
+			changeline(line);
+			head = first_list(line, split, 'A');
+			while (++symbol <= ret_sumbol(line))
+				add_ls(head, line, split, symbol);
+			free_array(split);
+			free_array(line);
+			solve(head);
+		}
 	}
-	fd = open(argv[1], O_RDONLY);
-	array = read_write(fd);
-	if (!array || !lets_check_all(array) || counter_tetramino(array) > 26)
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	close(fd);
-	div_prog = mem_for_tetraminos(array);
-	result(array, div_prog);
-	free_lst(div_prog);
-	free(array);
+	else
+		write(1, "usage: fillit input_file\n", 25);
 	return (0);
 }

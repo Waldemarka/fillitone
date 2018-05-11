@@ -3,25 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsarapin <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: vomelchu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/12/05 16:52:36 by vsarapin          #+#    #+#              #
-#    Updated: 2017/12/05 16:54:35 by vsarapin         ###   ########.fr        #
+#    Created: 2018/05/06 18:03:35 by vomelchu          #+#    #+#              #
+#    Updated: 2018/05/06 18:04:51 by vomelchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fillit
 
 SRC		= ./main.c  \
-		  ./move.c  \
-		  ./readwrite.c   \
-		  ./square.c \
-		  ./validandmemory.c \
+		  ./openvalid.c  \
+		  ./other.c   \
+		  ./ft_strsplit.c \
+		  ./cuting.c \
+		  ./addfunc.c \
+		  ./ft_strjoin.c \
+		  ./ft_strsub.c \
+		  ./pastlist.c \
 		  ./ft_putchar.c \
 		  ./ft_putstr.c \
-		  ./ft_strsub.c \
-		  ./ft_strlen.c \
+		  ./collisions.c \
+		  ./map.c \
+		  ./solver.c \
+		  ./ft_memset.c \
 		  ./ft_putendl.c \
+		  ./ft_strnew.c \
+
 
 OBJ		= $(SRC:.c=.o)
 

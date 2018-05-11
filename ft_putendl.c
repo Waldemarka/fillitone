@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsarapin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhromads <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 09:55:07 by vsarapin          #+#    #+#             */
-/*   Updated: 2017/11/20 18:27:17 by vsarapin         ###   ########.fr       */
+/*   Created: 2018/04/16 16:23:18 by dhromads          #+#    #+#             */
+/*   Updated: 2018/04/16 16:23:21 by dhromads         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_putendl(const char *s)
+void	ft_putendl(char const *s)
 {
-	ft_putstr(s);
-	ft_putchar('\n');
+	if (s)
+	{
+		ft_putstr(s);
+		ft_putchar('\n');
+	}
 }

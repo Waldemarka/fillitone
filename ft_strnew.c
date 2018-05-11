@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhromads <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 16:20:29 by dhromads          #+#    #+#             */
-/*   Updated: 2018/04/16 16:20:43 by dhromads         ###   ########.fr       */
+/*   Created: 2018/04/16 15:01:50 by dhromads          #+#    #+#             */
+/*   Updated: 2018/04/16 15:02:51 by dhromads         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "fillit.h"
+#include <stdlib.h>
 
-void	ft_putchar(char c)
+char	*ft_strnew(size_t size)
 {
-	write(1, &c, 1);
+	char *str;
+
+	str = (char *)malloc(sizeof(*str) * size + 1);
+	if (str == (NULL))
+		return (NULL);
+	ft_memset(str, '\0', size + 1);
+	return (str);
 }

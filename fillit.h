@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsarapin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vomelchu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 16:06:25 by vsarapin          #+#    #+#             */
-/*   Updated: 2017/12/05 16:41:36 by vsarapin         ###   ########.fr       */
+/*   Created: 2018/05/06 16:48:52 by vomelchu          #+#    #+#             */
+/*   Updated: 2018/05/09 20:35:01 by vomelchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,65 @@
 # include <string.h>
 # include <stdlib.h>
 
-typedef struct	s_tetraminos
+typedef struct		s_figur
 {
-	char				letter;
-	int					x[4];
-	int					y[4];
-	struct s_tetraminos	*next;
-}				t_tetra;
+	char			letter;
+	int				row;
+	int				col;
+	char			**type;
+	struct s_figur	*next;
+}					t_figur;
 
-void			free_lst(t_tetra *div_prog);
-void			free_square(char **square);
-void			ft_putendl(const char *s);
-void			ft_putstr(char const *str);
-void			ft_putchar(char c);
-char			*ft_strsub(char const *s, unsigned int start, size_t len);
-int				lets_check_all(char *array);
-size_t			ft_strlen(const char *str);
-void			result(char *array, t_tetra *div_prog);
-char			**try_to_add(char **new_square, t_tetra *div_prog, int size);
-int				size (int counter_tetraminos);
-int				looking_for_sp(char **new_square, t_tetra *div_prog, int size);
-void			change_coordinates(t_tetra *div_prog, int x, int y);
-char			**square(char **new_square, int size);
-char			*read_write(int fd);
-char			**add_tetramino(char **square, t_tetra *div_prog, int size);
-char			**del_tetramino(char **square, t_tetra *div_prog, int size);
-void			print_square(char **square);
-void			make_one_field(t_tetra *temporary, char *array);
-int				counter_tetramino(char *array);
-t_tetra			*mem_for_tetraminos(char *array);
-int				valid(char *array, int j);
-int				valid_tetraminos(char *array, int j);
+typedef struct		s_map
+{
+	int				size;
+	char			**field;
+}					t_map;
+
+void				ft_error(void);
+int					ft_colum(char **str, int first);
+int					ft_row(char **str, int first);
+int					forsquare(char **str, int first);
+int					rightfigure(char **str);
+char				**ft_strsplit(char const *s, char c);
+char				**cutfigure(char **str);
+char				**fileopen(char *str);
+int					checksize(char **str);
+int					checksizemap(char **str);
+int					checksymbol(char **str);
+int					checkcountsymb(char **str);
+size_t				ft_strlen(const char *str);
+int					checkmulti(char *str);
+int					sizearray(char **str);
+int					ft_numrow(char **split, int index);
+int					ft_numcol(char **split, int index);
+char				*oneline(char **split, int first, int numcol, int numrow);
+char				**cutfigure(char **split);
+int					ft_colindex(char **split, int index);
+int					ft_rowindex(char **split, int index);
+char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strsub(char const *s, unsigned int start, size_t len);
+void				changeline(char **str);
+char				ret_sumbol(char **str);
+void				add_ls(t_figur *head, char **str, char **split, char sym);
+t_figur				*first_list(char **str, char **split, char sym);
+void				cpdt(t_figur *current, char **str, char **split, char sym);
+void				fpast(t_figur *current, char **str, char **split, char sym);
+int					ft_conect(char **str, int second, int first, int count);
+void				*ft_memset(void *b, int c, size_t len);
+char				*ft_strnew(size_t size);
+void				ft_putendl(char const *s);
+void				ft_putchar(char c);
+void				ft_putstr(char const *s);
+t_map				*new_map(int size);
+void				print_map(t_map *map);
+int					get_min_squre(t_figur *list);
+int					wall_col_check(t_map *map, t_figur *tetr, int x, int y);
+int					collision_check (t_map *map, t_figur *tetr, int x, int y);
+int					col_check(t_map *map, t_figur *tetri, int x, int y);
+int					fseter(t_map *map, t_figur *tetr, int x, int y);
+int					fclener (t_map *map, t_figur *tetr, int x, int y);
+int					map_solver(t_map *map, t_figur *list);
+void				solve(t_figur *list);
 
 #endif
